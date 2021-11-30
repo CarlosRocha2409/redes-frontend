@@ -1,0 +1,77 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  background-image: url(../../../assets//images/code-bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: inset 0 0 0 2000px rgba($color: #000, $alpha: 0.6);
+  > .login-card {
+    background-color: var(--darker-blue);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 300px;
+    border-radius: 25px;
+    > img {
+      width: 30%;
+    }
+
+    > h3 {
+      color: var(--lighter-blue);
+      font-family: var(--principal-font);
+      text-transform: uppercase;
+      text-align: center;
+    }
+    > form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      > .login-input {
+        margin-bottom: 40px;
+        width: 100%;
+        > label {
+          color: var(--lighter-blue);
+        }
+        > .Mui-focused {
+          color: var(--orange) !important;
+        }
+        > .MuiInput-root {
+          &::before {
+            border-bottom: 1px solid var(--orange);
+          }
+          &::after {
+            border-bottom: 1px solid var(--lighter-blue);
+          }
+          > input {
+            color: var(--lighter-blue);
+          }
+        }
+      }
+      > button {
+        background-color: var(--dark-blue);
+        color: var(--orange);
+        &:hover {
+          color: var(--lighter-blue);
+          background-color: var(--orange);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .login {
+    > .login-card {
+      max-width: 200px;
+    }
+  }
+}
