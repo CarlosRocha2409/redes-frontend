@@ -2,7 +2,12 @@ import "./index.scss";
 import connect from "../../../assets/images/conexion.png";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+
+import axios from "axios";
 import { useState } from "react";
+
+const API_URL = "http://127.0.0.1:5000/api/token/";
 
 export default function Login({
   setIsAuthenticated,
@@ -11,13 +16,23 @@ export default function Login({
 }): JSX.Element {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const login = () => {
-    setIsAuthenticated(true);
-    console.log({
-      username: username,
-      password: password,
-    });
+  const login = async () => {
+    setIsLoading(true);
+    await axios
+      .post(API_URL, {
+        username: username,
+        password: password,
+      })
+      .then(() => {
+        setIsAuthenticated(true);
+      })
+      .catch(() => {
+        setError(true);
+      });
+    setIsLoading(false);
   };
   return (
     <div className="login">
@@ -41,10 +56,14 @@ export default function Login({
             variant="standard"
             type="password"
           />
-          <Button variant="contained" onClick={() => login()}>
-            Login
-          </Button>
+          {!isLoading && (
+            <Button variant="contained" onClick={() => login()}>
+              Login
+            </Button>
+          )}
         </form>
+        {isLoading && <CircularProgress />}
+        {error && <p className="login-err">Usuario o contraseña incorrectos</p>}
       </div>
     </div>
   );

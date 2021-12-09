@@ -29,6 +29,18 @@
       text-transform: uppercase;
       text-align: center;
     }
+    > .login-err {
+      color: red;
+      font-family: var(--principal-font);
+      font-size: 18px;
+    }
+    > .MuiCircularProgress-root {
+      svg {
+        circle {
+          stroke: var(--orange);
+        }
+      }
+    }
     > form {
       display: flex;
       justify-content: center;
